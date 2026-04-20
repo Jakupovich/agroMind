@@ -12,30 +12,40 @@ interface Props {
   color?: string;
 }
 
-export function AnimatedNumber({ target, duration = 1800, suffix = '', prefix = '', style, fontSize = FontSize.hero, color = Colors.green }: Props) {
+export function AnimatedNumber({ 
+  target, 
+  duration = 1800, 
+  suffix = '', 
+  prefix = '', 
+  style, 
+  fontSize = FontSize.hero, 
+  color = Colors.green 
+}: Props) {
   const animValue = useRef(new Animated.Value(0)).current;
-  const displayValue = useRef(0);
 
   useEffect(() => {
+    // Reset to 0 before animating if target changes, or remove the reset 
+    // to animate from current value to new target.
+    animValue.setValue(0); 
+    
     Animated.timing(animValue, {
       toValue: target,
       duration,
-      useNativeDriver: false,
+      useNativeDriver: false, // Must be false for interpolation of strings/numbers in Text
     }).start();
   }, [target]);
+
+  // Interpolation handles the transition from start to target value
+  const animatedText = animValue.interpolate({
+    inputRange: [0, target],
+    outputRange: [`${prefix}0${suffix}`, `${prefix}${target}${suffix}`],
+  });
 
   return (
     <Animated.Text
       style={[{ fontSize, fontWeight: '800', color, letterSpacing: -1 }, style]}
     >
-      {animValue.interpolate({
-        inputRange: [0, target],
-        outputRange: [`${prefix}0${suffix}`, `${prefix}${target}${suffix}`],
-      })}
+      {animatedText}
     </Animated.Text>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
