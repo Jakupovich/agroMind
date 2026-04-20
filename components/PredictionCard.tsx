@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated, Pressable, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Animated } from 'react-native';
 import { MotiView } from 'moti';
 import { BlurView } from 'expo-blur';
-import { TrendingUp, Calendar, DollarSign, AlertTriangle, CheckCircle, ChevronRight } from 'lucide-react-native';
+import { TrendingUp, Calendar, DollarSign, AlertTriangle, CheckCircle } from 'lucide-react-native';
 import { PulseIndicator } from './Pulseindicator';
 import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
 
@@ -49,7 +49,7 @@ export function PredictionCard({ data, delay = 0, compact = false }: Props) {
       delay: delay + 400,
       useNativeDriver: false,
     }).start();
-  }, []);
+  }, [data.probability, delay]);
 
   const isOptimal = data.status === 'optimal';
   const statusColor = isOptimal ? Colors.green : Colors.red;
@@ -78,8 +78,8 @@ export function PredictionCard({ data, delay = 0, compact = false }: Props) {
             <Text style={styles.probLabel}>Success Probability</Text>
             <Animated.Text style={[styles.probValue, { color: statusColor }]}>
               {probAnim.interpolate({
-                inputRange: [0, data.probability],
-                outputRange: ['0%', `${data.probability}%`],
+                inputRange: [0, 100],
+                outputRange: ['0%', '100%'],
               })}
             </Animated.Text>
           </View>
@@ -90,7 +90,6 @@ export function PredictionCard({ data, delay = 0, compact = false }: Props) {
               transition={{ type: 'timing', duration: 1400, delay: delay + 300 }}
               style={[styles.probFill, { backgroundColor: statusColor }]}
             />
-            <View style={[styles.probGlow, { backgroundColor: statusColor, left: `${data.probability}%` }]} />
           </View>
         </View>
 
@@ -253,15 +252,6 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
   },
-  probGlow: {
-    position: 'absolute',
-    top: -2,
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    opacity: 0.6,
-    transform: [{ translateX: -6 }],
-  },
   metricsRow: {
     flexDirection: 'row',
     backgroundColor: Colors.bgCardAlt,
@@ -363,8 +353,4 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     flex: 1,
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
