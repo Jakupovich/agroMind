@@ -10,11 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MotiView } from 'moti';
 import { BlurView } from 'expo-blur';
 import { BarChart2, TrendingUp, AlertCircle, Calendar } from 'lucide-react-native';
-<<<<<<< HEAD
-import { WeatherChart } from '@/components/WatherChart';
-=======
-import { WeatherChart } from '../../components/WeatherChart';
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
+import { WeatherChart } from '@/components/WeatherChart';
 import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
 import { temperatureHistory } from '@/constants/mockData';
 
@@ -209,245 +205,49 @@ export default function HistoryScreen() {
 }
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-  scroll: {
-    flex: 1,
-  },
-  content: {
-    gap: Spacing.lg,
-    paddingHorizontal: Spacing.md,
-  },
-  header: {
-    gap: 4,
-  },
-  titleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    marginBottom: 2,
-  },
-  pageTag: {
-    fontSize: FontSize.xs,
-    color: Colors.green,
-    fontWeight: '800',
-    letterSpacing: 1.5,
-  },
-  pageTitle: {
-    fontSize: FontSize.xxl,
-    color: Colors.textPrimary,
-    fontWeight: '800',
-    letterSpacing: -0.8,
-  },
-  pageSubtitle: {
-    fontSize: FontSize.sm,
-    color: Colors.textSecondary,
-    fontWeight: '500',
-  },
-  kpiRow: {
-    flexDirection: 'row',
-    gap: Spacing.sm,
-  },
-  kpiCard: {
-    flex: 1,
-    borderRadius: Radius.lg,
-    overflow: 'hidden',
-    shadowColor: Colors.green,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  kpiInner: {
-    padding: Spacing.md,
-    borderRadius: Radius.lg,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    gap: 3,
-    overflow: 'hidden',
-    alignItems: 'center',
-  },
-  kpiValue: {
-    fontSize: FontSize.xl,
-    fontWeight: '800',
-    letterSpacing: -0.5,
-  },
-  kpiLabel: {
-    fontSize: FontSize.xs,
-    color: Colors.textSecondary,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  kpiSub: {
-    fontSize: 10,
-    color: Colors.textMuted,
-    textAlign: 'center',
-  },
-  sectionTitle: {
-    fontSize: FontSize.base,
-    color: Colors.textPrimary,
-    fontWeight: '700',
-  },
-  decadeCard: {
-    borderRadius: Radius.xl,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    padding: Spacing.lg,
-    gap: Spacing.md,
-    overflow: 'hidden',
-  },
-  decadeScroll: {
-    flexDirection: 'row',
-    gap: Spacing.sm,
-  },
-  decadeChip: {
-    padding: Spacing.md,
-    borderRadius: Radius.md,
-    borderWidth: 1,
-    gap: 4,
-    minWidth: 150,
-  },
-  decadeYear: {
-    fontSize: FontSize.xs,
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 0.8,
-  },
-  decadeAvg: {
-    fontSize: FontSize.xl,
-    fontWeight: '800',
-    letterSpacing: -0.5,
-  },
-  decadeTrend: {
-    fontSize: FontSize.sm,
-    fontWeight: '600',
-  },
-  decadeCrop: {
-    fontSize: FontSize.xs,
-    fontWeight: '500',
-  },
-  eventsCard: {
-    borderRadius: Radius.xl,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    padding: Spacing.lg,
-    gap: Spacing.md,
-    overflow: 'hidden',
-  },
-  eventsHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  eventsList: {
-    gap: 12,
-  },
-  eventItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.sm,
-  },
-  eventYearBadge: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
-    borderWidth: 1,
-  },
-  eventYear: {
-    fontSize: FontSize.sm,
-    fontWeight: '800',
-  },
-  eventInfo: {
-    flex: 1,
-    gap: 2,
-  },
-  eventName: {
-    fontSize: FontSize.sm,
-    color: Colors.textPrimary,
-    fontWeight: '600',
-  },
-  eventMeta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  eventAnomaly: {
-    fontSize: FontSize.xs,
-    fontWeight: '700',
-  },
-  eventDot: {
-    color: Colors.textMuted,
-    fontSize: FontSize.xs,
-  },
-  eventLoss: {
-    fontSize: FontSize.xs,
-    color: Colors.textSecondary,
-    fontWeight: '500',
-  },
-  impactBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 6,
-  },
-  impactLabel: {
-    fontSize: FontSize.xs,
-    fontWeight: '700',
-    textTransform: 'capitalize',
-  },
-  projectionCard: {
-    borderRadius: Radius.xl,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    padding: Spacing.lg,
-    gap: Spacing.md,
-    overflow: 'hidden',
-  },
-  projectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  projectionGrid: {
-    gap: 12,
-  },
-  projRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.sm,
-    paddingVertical: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.borderSubtle,
-  },
-  projLabel: {
-    fontSize: FontSize.sm,
-    color: Colors.textSecondary,
-    fontWeight: '500',
-    flex: 1.2,
-  },
-  projCurrent: {
-    fontSize: FontSize.sm,
-    color: Colors.textSecondary,
-    fontWeight: '600',
-    flex: 1,
-  },
-  projArrow: {
-    color: Colors.textMuted,
-    fontWeight: '600',
-  },
-  projFuture: {
-    fontSize: FontSize.sm,
-    fontWeight: '700',
-    flex: 1,
-  },
-  projDelta: {
-    fontSize: FontSize.sm,
-    fontWeight: '800',
-    minWidth: 40,
-    textAlign: 'right',
-  },
-<<<<<<< HEAD
+  root: { flex: 1 },
+  scroll: { flex: 1 },
+  content: { gap: Spacing.lg, paddingHorizontal: Spacing.md },
+  header: { gap: 4 },
+  titleRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 2 },
+  pageTag: { fontSize: FontSize.xs, color: Colors.green, fontWeight: '800', letterSpacing: 1.5 },
+  pageTitle: { fontSize: FontSize.xxl, color: Colors.textPrimary, fontWeight: '800', letterSpacing: -0.8 },
+  pageSubtitle: { fontSize: FontSize.sm, color: Colors.textSecondary, fontWeight: '500' },
+  kpiRow: { flexDirection: 'row', gap: Spacing.sm },
+  kpiCard: { flex: 1, borderRadius: Radius.lg, overflow: 'hidden', elevation: 4 },
+  kpiInner: { padding: Spacing.md, borderRadius: Radius.lg, borderWidth: 1, borderColor: Colors.border, gap: 3, overflow: 'hidden', alignItems: 'center' },
+  kpiValue: { fontSize: FontSize.xl, fontWeight: '800', letterSpacing: -0.5 },
+  kpiLabel: { fontSize: FontSize.xs, color: Colors.textSecondary, fontWeight: '600', textAlign: 'center' },
+  kpiSub: { fontSize: 10, color: Colors.textMuted, textAlign: 'center' },
+  sectionTitle: { fontSize: FontSize.base, color: Colors.textPrimary, fontWeight: '700' },
+  decadeCard: { borderRadius: Radius.xl, borderWidth: 1, borderColor: Colors.border, padding: Spacing.lg, gap: Spacing.md, overflow: 'hidden' },
+  decadeScroll: { flexDirection: 'row', gap: Spacing.sm },
+  decadeChip: { padding: Spacing.md, borderRadius: Radius.md, borderWidth: 1, gap: 4, minWidth: 150 },
+  decadeYear: { fontSize: FontSize.xs, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.8 },
+  decadeAvg: { fontSize: FontSize.xl, fontWeight: '800', letterSpacing: -0.5 },
+  decadeTrend: { fontSize: FontSize.sm, fontWeight: '600' },
+  decadeCrop: { fontSize: FontSize.xs, fontWeight: '500' },
+  eventsCard: { borderRadius: Radius.xl, borderWidth: 1, borderColor: Colors.border, padding: Spacing.lg, gap: Spacing.md, overflow: 'hidden' },
+  eventsHeader: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  eventsList: { gap: 12 },
+  eventItem: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm },
+  eventYearBadge: { paddingHorizontal: 10, paddingVertical: 5, borderRadius: 8, borderWidth: 1 },
+  eventYear: { fontSize: FontSize.sm, fontWeight: '800' },
+  eventInfo: { flex: 1, gap: 2 },
+  eventName: { fontSize: FontSize.sm, color: Colors.textPrimary, fontWeight: '600' },
+  eventMeta: { flexDirection: 'row', alignItems: 'center', gap: 5 },
+  eventAnomaly: { fontSize: FontSize.xs, fontWeight: '700' },
+  eventDot: { color: Colors.textMuted, fontSize: FontSize.xs },
+  eventLoss: { fontSize: FontSize.xs, color: Colors.textSecondary, fontWeight: '500' },
+  impactBadge: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6 },
+  impactLabel: { fontSize: FontSize.xs, fontWeight: '700', textTransform: 'capitalize' },
+  projectionCard: { borderRadius: Radius.xl, borderWidth: 1, borderColor: Colors.border, padding: Spacing.lg, gap: Spacing.md, overflow: 'hidden' },
+  projectionHeader: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  projectionGrid: { gap: 12 },
+  projRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm, paddingVertical: 6, borderBottomWidth: 1, borderBottomColor: Colors.borderSubtle },
+  projLabel: { fontSize: FontSize.sm, color: Colors.textSecondary, fontWeight: '500', flex: 1.2 },
+  projCurrent: { fontSize: FontSize.sm, color: Colors.textSecondary, fontWeight: '600', flex: 1 },
+  projArrow: { color: Colors.textMuted, fontWeight: '600' },
+  projFuture: { fontSize: FontSize.sm, fontWeight: '700', flex: 1 },
+  projDelta: { fontSize: FontSize.sm, fontWeight: '800', minWidth: 40, textAlign: 'right' },
 });
-=======
-});
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
