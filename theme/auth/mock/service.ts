@@ -221,8 +221,4 @@ export class MockAuthService {
   }
 }
 
-<<<<<<< HEAD
 export const mockAuthService = new MockAuthService();
-=======
-export const mockAuthService = new MockAuthService();
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
