@@ -431,7 +431,6 @@ export default function DashboardScreen() {
             ))}
           </ScrollView>
         </View>
-
         <ClimateScoreCard
           score={82}
           region="Upper Bavaria · Zone 7b"

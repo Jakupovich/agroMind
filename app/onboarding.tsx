@@ -72,9 +72,13 @@ export default function OnboardingScreen() {
     setMarkerPosition(coordinate);
   };
   useEffect(() => {
+    let retryCount = 0;
+    const maxRetries = 5;
+  
     const loadSavedLocation = async () => {
       try {
         const savedLocation = await AsyncStorage.getItem("user_location");
+        
         if (savedLocation) {
           const { coords } = JSON.parse(savedLocation);
           setmapRegion({
@@ -84,12 +88,15 @@ export default function OnboardingScreen() {
             longitudeDelta: 0.05,
           });
           setMarkerPosition(coords);
+        } else if (retryCount < maxRetries) {
+          retryCount++;
+          setTimeout(loadSavedLocation, 2000); 
         }
       } catch (e) {
         console.error("Failed to load location", e);
       }
     };
-
+  
     loadSavedLocation();
   }, []);
   const insets = useSafeAreaInsets();
