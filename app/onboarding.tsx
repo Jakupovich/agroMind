@@ -1,3 +1,31 @@
+<<<<<<< HEAD
+import React, { useState, useRef } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
+import { router } from 'expo-router';
+import { Image } from 'expo-image';
+import { MotiView } from 'moti';
+import { BlurView } from 'expo-blur';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
+import { MapPin, Cpu, Shield, ChevronRight, Check } from 'lucide-react-native';
+
+const { width, height } = Dimensions.get('window');
+
+const SLIDES = [
+  {
+    image: require('@/assets/images/onboarding-1.jpg'),
+    tag: 'SMART FARMING',
+    title: 'Know Your\nField\'s Future',
+    subtitle: 'AI-powered climate analysis tailored to your exact field location and crop variety.',
+=======
 import { Colors, FontSize, Radius, Spacing } from "@/constants/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BlurView } from "expo-blur";
@@ -33,29 +61,50 @@ const SLIDES = [
     title: "Know Your\nField's Future",
     subtitle:
       "AI-powered climate analysis tailored to your exact field location and crop variety.",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     accent: Colors.green,
     icon: MapPin,
   },
   {
+<<<<<<< HEAD
+    image: require('@/assets/images/onboarding-2.jpg'),
+    tag: 'AI ENGINE',
+    title: 'Predict Before\nRisks Arrive',
+    subtitle: 'Ensemble models trained on 20 years of regional climate data deliver 91% forecast accuracy.',
+=======
     image: require("@/assets/images/onboarding-2.jpg"),
     tag: "AI ENGINE",
     title: "Predict Before\nRisks Arrive",
     subtitle:
       "Ensemble models trained on 20 years of regional climate data deliver 91% forecast accuracy.",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     accent: Colors.amber,
     icon: Cpu,
   },
   {
+<<<<<<< HEAD
+    image: require('@/assets/images/onboarding-3.jpg'),
+    tag: 'HAILGUARD',
+    title: 'Automated\nPlant Protection',
+    subtitle: 'Smart hardware deploys hail shields the moment sensors detect incoming storm cells.',
+=======
     image: require("@/assets/images/onboarding-3.jpg"),
     tag: "HAILGUARD",
     title: "Automated\nPlant Protection",
     subtitle:
       "Smart hardware deploys hail shields the moment sensors detect incoming storm cells.",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     accent: Colors.green,
     icon: Shield,
   },
 ];
 
+<<<<<<< HEAD
+const CROPS = ['Corn', 'Wheat', 'Soybeans', 'Barley', 'Rapeseed', 'Potatoes'];
+const SIZES = ['< 5 ha', '5–20 ha', '20–50 ha', '50–100 ha', '> 100 ha'];
+
+export default function OnboardingScreen() {
+=======
 const CROPS = ["Corn", "Wheat", "Soybeans", "Barley", "Rapeseed", "Potatoes"];
 const SIZES = ["< 5 ha", "5–20 ha", "20–50 ha", "50–100 ha", "> 100 ha"];
 
@@ -99,13 +148,18 @@ export default function OnboardingScreen() {
   
     loadSavedLocation();
   }, []);
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
   const insets = useSafeAreaInsets();
   const scrollRef = useRef<ScrollView>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showSetup, setShowSetup] = useState(false);
   const [selectedCrops, setSelectedCrops] = useState<string[]>([]);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+<<<<<<< HEAD
+  const [farmName, setFarmName] = useState('');
+=======
   const [farmName, setFarmName] = useState("");
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
 
   const goNext = () => {
     if (currentSlide < SLIDES.length - 1) {
@@ -118,20 +172,48 @@ export default function OnboardingScreen() {
   };
 
   const toggleCrop = (crop: string) => {
+<<<<<<< HEAD
+    setSelectedCrops(prev =>
+      prev.includes(crop) ? prev.filter(c => c !== crop) : [...prev, crop]
+=======
     setSelectedCrops((prev) =>
       prev.includes(crop) ? prev.filter((c) => c !== crop) : [...prev, crop]
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     );
   };
 
   const complete = async () => {
+<<<<<<< HEAD
+    await AsyncStorage.setItem('onboarding_complete', 'true');
+    await AsyncStorage.setItem('farm_crops', JSON.stringify(selectedCrops));
+    await AsyncStorage.setItem('farm_size', selectedSize ?? '');
+    router.replace('/(tabs)');
+=======
     await AsyncStorage.setItem("onboarding_complete", "true");
     await AsyncStorage.setItem("farm_crops", JSON.stringify(selectedCrops));
     await AsyncStorage.setItem("farm_size", selectedSize ?? "");
     router.replace("/(tabs)");
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
   };
 
   if (showSetup) {
     return (
+<<<<<<< HEAD
+      <View style={[styles.root, { backgroundColor: Colors.bg }]}>
+        <MotiView
+          from={{ opacity: 0, translateY: 40 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ type: 'timing', duration: 600 }}
+          style={[styles.setupContainer, { paddingTop: insets.top + 32, paddingBottom: insets.bottom + 24 }]}
+        >
+          <View style={styles.setupHeader}>
+            <View style={[styles.setupIconWrap, { backgroundColor: Colors.greenDim, borderColor: Colors.border }]}>
+              <MapPin size={24} color={Colors.green} strokeWidth={2} />
+            </View>
+            <Text style={styles.setupTag}>FARM SETUP</Text>
+            <Text style={styles.setupTitle}>Tell us about{'\n'}your farm</Text>
+            <Text style={styles.setupSubtitle}>We'll personalise predictions for your specific field conditions.</Text>
+=======
       <ScrollView style={[styles.root, { backgroundColor: Colors.bg }]}>
         <MotiView
           from={{ opacity: 0, translateY: 40 }}
@@ -159,6 +241,7 @@ export default function OnboardingScreen() {
             <Text style={styles.setupSubtitle}>
               We'll personalise predictions for your specific field conditions.
             </Text>
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
           </View>
 
           <View style={styles.setupSection}>
@@ -171,15 +254,31 @@ export default function OnboardingScreen() {
                     key={crop}
                     from={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
+<<<<<<< HEAD
+                    transition={{ type: 'timing', duration: 300, delay: i * 60 }}
+=======
                     transition={{
                       type: "timing",
                       duration: 300,
                       delay: i * 60,
                     }}
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
                   >
                     <Pressable onPress={() => toggleCrop(crop)}>
                       <MotiView
                         animate={{
+<<<<<<< HEAD
+                          backgroundColor: selected ? Colors.green + '22' : Colors.bgCardAlt,
+                          borderColor: selected ? Colors.green + '66' : Colors.borderSubtle,
+                        }}
+                        transition={{ type: 'timing', duration: 150 }}
+                        style={styles.cropChip}
+                      >
+                        {selected ? (
+                          <Check size={13} color={Colors.green} strokeWidth={2.5} />
+                        ) : null}
+                        <Text style={[styles.cropChipLabel, { color: selected ? Colors.green : Colors.textSecondary }]}>
+=======
                           backgroundColor: selected
                             ? Colors.green + "22"
                             : Colors.bgCardAlt,
@@ -207,6 +306,7 @@ export default function OnboardingScreen() {
                             },
                           ]}
                         >
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
                           {crop}
                         </Text>
                       </MotiView>
@@ -226,6 +326,15 @@ export default function OnboardingScreen() {
                   <Pressable key={size} onPress={() => setSelectedSize(size)}>
                     <MotiView
                       animate={{
+<<<<<<< HEAD
+                        backgroundColor: selected ? Colors.green + '22' : Colors.bgCardAlt,
+                        borderColor: selected ? Colors.green + '66' : Colors.borderSubtle,
+                      }}
+                      transition={{ type: 'timing', duration: 150 }}
+                      style={styles.sizeChip}
+                    >
+                      <Text style={[styles.sizeChipLabel, { color: selected ? Colors.green : Colors.textSecondary }]}>
+=======
                         backgroundColor: selected
                           ? Colors.green + "22"
                           : Colors.bgCardAlt,
@@ -246,6 +355,7 @@ export default function OnboardingScreen() {
                           },
                         ]}
                       >
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
                         {size}
                       </Text>
                     </MotiView>
@@ -254,6 +364,24 @@ export default function OnboardingScreen() {
               })}
             </View>
           </View>
+<<<<<<< HEAD
+
+          <Pressable
+            onPress={complete}
+            style={({ pressed }) => [styles.completeBtn, { opacity: pressed ? 0.85 : 1 }]}
+          >
+            <MotiView
+              style={[styles.completeBtnInner, {
+                backgroundColor: selectedCrops.length > 0 && selectedSize ? Colors.green : Colors.bgCardAlt,
+              }]}
+            >
+              <Text style={[styles.completeBtnLabel, {
+                color: selectedCrops.length > 0 && selectedSize ? '#000' : Colors.textMuted,
+              }]}>
+                Launch Agro-Predict
+              </Text>
+              <ChevronRight size={18} color={selectedCrops.length > 0 && selectedSize ? '#000' : Colors.textMuted} strokeWidth={2.5} />
+=======
           <MotiView
             from={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -346,6 +474,7 @@ export default function OnboardingScreen() {
                 }
                 strokeWidth={2.5}
               />
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
             </MotiView>
           </Pressable>
 
@@ -353,7 +482,11 @@ export default function OnboardingScreen() {
             <Text style={styles.skipSetupLabel}>Skip setup for now</Text>
           </Pressable>
         </MotiView>
+<<<<<<< HEAD
+      </View>
+=======
       </ScrollView>
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     );
   }
 
@@ -378,6 +511,20 @@ export default function OnboardingScreen() {
                 transition={400}
               />
               <View style={styles.slideOverlay} />
+<<<<<<< HEAD
+              <View style={[styles.slideContent, { paddingBottom: insets.bottom + 160, paddingTop: insets.top + 32 }]}>
+                <MotiView
+                  key={`tag-${index}-${currentSlide}`}
+                  from={{ opacity: 0, translateY: -20 }}
+                  animate={{ opacity: currentSlide === index ? 1 : 0, translateY: currentSlide === index ? 0 : -20 }}
+                  transition={{ type: 'timing', duration: 600, delay: 200 }}
+                  style={styles.slideTagRow}
+                >
+                  <View style={[styles.slideIconWrap, { backgroundColor: slide.accent + '22', borderColor: slide.accent + '44' }]}>
+                    <Icon size={16} color={slide.accent} strokeWidth={2} />
+                  </View>
+                  <Text style={[styles.slideTag, { color: slide.accent }]}>{slide.tag}</Text>
+=======
               <View
                 style={[
                   styles.slideContent,
@@ -411,26 +558,37 @@ export default function OnboardingScreen() {
                   <Text style={[styles.slideTag, { color: slide.accent }]}>
                     {slide.tag}
                   </Text>
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
                 </MotiView>
                 <MotiView
                   key={`title-${index}-${currentSlide}`}
                   from={{ opacity: 0, translateY: 30 }}
+<<<<<<< HEAD
+                  animate={{ opacity: currentSlide === index ? 1 : 0, translateY: currentSlide === index ? 0 : 30 }}
+                  transition={{ type: 'timing', duration: 650, delay: 300 }}
+=======
                   animate={{
                     opacity: currentSlide === index ? 1 : 0,
                     translateY: currentSlide === index ? 0 : 30,
                   }}
                   transition={{ type: "timing", duration: 650, delay: 300 }}
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
                 >
                   <Text style={styles.slideTitle}>{slide.title}</Text>
                 </MotiView>
                 <MotiView
                   key={`sub-${index}-${currentSlide}`}
                   from={{ opacity: 0, translateY: 20 }}
+<<<<<<< HEAD
+                  animate={{ opacity: currentSlide === index ? 1 : 0, translateY: currentSlide === index ? 0 : 20 }}
+                  transition={{ type: 'timing', duration: 600, delay: 450 }}
+=======
                   animate={{
                     opacity: currentSlide === index ? 1 : 0,
                     translateY: currentSlide === index ? 0 : 20,
                   }}
                   transition={{ type: "timing", duration: 600, delay: 450 }}
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
                 >
                   <Text style={styles.slideSubtitle}>{slide.subtitle}</Text>
                 </MotiView>
@@ -440,26 +598,42 @@ export default function OnboardingScreen() {
         })}
       </ScrollView>
 
+<<<<<<< HEAD
+      <BlurView intensity={20} tint="dark" style={[styles.bottomPanel, { paddingBottom: insets.bottom + 24 }]}>
+=======
       <BlurView
         intensity={20}
         tint="dark"
         style={[styles.bottomPanel, { paddingBottom: insets.bottom + 24 }]}
       >
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
         <View style={styles.dotsRow}>
           {SLIDES.map((_, i) => (
             <MotiView
               key={i}
               animate={{
                 width: currentSlide === i ? 24 : 6,
+<<<<<<< HEAD
+                backgroundColor: currentSlide === i ? Colors.green : Colors.textMuted,
+              }}
+              transition={{ type: 'timing', duration: 250 }}
+=======
                 backgroundColor:
                   currentSlide === i ? Colors.green : Colors.textMuted,
               }}
               transition={{ type: "timing", duration: 250 }}
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
               style={styles.dot}
             />
           ))}
         </View>
 
+<<<<<<< HEAD
+        <Pressable onPress={goNext} style={({ pressed }) => [{ opacity: pressed ? 0.85 : 1 }]}>
+          <View style={styles.nextBtn}>
+            <Text style={styles.nextBtnLabel}>
+              {currentSlide < SLIDES.length - 1 ? 'Continue' : 'Get Started'}
+=======
         <Pressable
           onPress={goNext}
           style={({ pressed }) => [{ opacity: pressed ? 0.85 : 1 }]}
@@ -467,6 +641,7 @@ export default function OnboardingScreen() {
           <View style={styles.nextBtn}>
             <Text style={styles.nextBtnLabel}>
               {currentSlide < SLIDES.length - 1 ? "Continue" : "Get Started"}
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
             </Text>
             <ChevronRight size={20} color="#000" strokeWidth={2.5} />
           </View>
@@ -483,6 +658,8 @@ export default function OnboardingScreen() {
 }
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
+=======
   lwHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -573,6 +750,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: "#fff",
   },
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
   root: {
     flex: 1,
   },
@@ -585,6 +763,18 @@ const styles = StyleSheet.create({
   },
   slideImage: {
     ...StyleSheet.absoluteFillObject,
+<<<<<<< HEAD
+    width: '100%',
+    height: '100%',
+  },
+  slideOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(13, 17, 23, 0.62)',
+  },
+  slideContent: {
+    flex: 1,
+    justifyContent: 'flex-end',
+=======
     width: "100%",
     height: "100%",
   },
@@ -595,12 +785,18 @@ const styles = StyleSheet.create({
   slideContent: {
     flex: 1,
     justifyContent: "flex-end",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     paddingHorizontal: Spacing.lg,
     gap: Spacing.md,
   },
   slideTagRow: {
+<<<<<<< HEAD
+    flexDirection: 'row',
+    alignItems: 'center',
+=======
     flexDirection: "row",
     alignItems: "center",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     gap: 8,
   },
   slideIconWrap: {
@@ -608,29 +804,50 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 10,
     borderWidth: 1,
+<<<<<<< HEAD
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  slideTag: {
+    fontSize: FontSize.xs,
+    fontWeight: '800',
+=======
     alignItems: "center",
     justifyContent: "center",
   },
   slideTag: {
     fontSize: FontSize.xs,
     fontWeight: "800",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     letterSpacing: 1.8,
   },
   slideTitle: {
     fontSize: 40,
     color: Colors.textPrimary,
+<<<<<<< HEAD
+    fontWeight: '800',
+=======
     fontWeight: "800",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     letterSpacing: -1.2,
     lineHeight: 46,
   },
   slideSubtitle: {
     fontSize: FontSize.base,
     color: Colors.textSecondary,
+<<<<<<< HEAD
+    fontWeight: '500',
+    lineHeight: 22,
+  },
+  bottomPanel: {
+    position: 'absolute',
+=======
     fontWeight: "500",
     lineHeight: 22,
   },
   bottomPanel: {
     position: "absolute",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     bottom: 0,
     left: 0,
     right: 0,
@@ -639,11 +856,19 @@ const styles = StyleSheet.create({
     gap: Spacing.md,
     borderTopWidth: 1,
     borderTopColor: Colors.border,
+<<<<<<< HEAD
+    overflow: 'hidden',
+  },
+  dotsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+=======
     overflow: "hidden",
   },
   dotsRow: {
     flexDirection: "row",
     alignItems: "center",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     gap: 6,
   },
   dot: {
@@ -651,9 +876,15 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   nextBtn: {
+<<<<<<< HEAD
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+=======
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     backgroundColor: Colors.green,
     borderRadius: Radius.md,
     height: 54,
@@ -661,18 +892,31 @@ const styles = StyleSheet.create({
   },
   nextBtnLabel: {
     fontSize: FontSize.base,
+<<<<<<< HEAD
+    color: '#000',
+    fontWeight: '800',
+    letterSpacing: 0.2,
+  },
+  skipBtn: {
+    alignItems: 'center',
+=======
     color: "#000",
     fontWeight: "800",
     letterSpacing: 0.2,
   },
   skipBtn: {
     alignItems: "center",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     paddingVertical: 6,
   },
   skipLabel: {
     fontSize: FontSize.sm,
     color: Colors.textMuted,
+<<<<<<< HEAD
+    fontWeight: '600',
+=======
     fontWeight: "600",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
   },
   setupContainer: {
     flex: 1,
@@ -687,27 +931,44 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 16,
     borderWidth: 1,
+<<<<<<< HEAD
+    alignItems: 'center',
+    justifyContent: 'center',
+=======
     alignItems: "center",
     justifyContent: "center",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     marginBottom: Spacing.sm,
   },
   setupTag: {
     fontSize: FontSize.xs,
     color: Colors.green,
+<<<<<<< HEAD
+    fontWeight: '800',
+=======
     fontWeight: "800",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     letterSpacing: 1.8,
   },
   setupTitle: {
     fontSize: FontSize.xxl,
     color: Colors.textPrimary,
+<<<<<<< HEAD
+    fontWeight: '800',
+=======
     fontWeight: "800",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     letterSpacing: -0.8,
     lineHeight: 38,
   },
   setupSubtitle: {
     fontSize: FontSize.sm,
     color: Colors.textSecondary,
+<<<<<<< HEAD
+    fontWeight: '500',
+=======
     fontWeight: "500",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     lineHeight: 20,
   },
   setupSection: {
@@ -716,6 +977,20 @@ const styles = StyleSheet.create({
   setupSectionLabel: {
     fontSize: FontSize.sm,
     color: Colors.textSecondary,
+<<<<<<< HEAD
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 1.2,
+  },
+  cropGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.sm,
+  },
+  cropChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+=======
     fontWeight: "700",
     textTransform: "uppercase",
     letterSpacing: 1.2,
@@ -728,6 +1003,7 @@ const styles = StyleSheet.create({
   cropChip: {
     flexDirection: "row",
     alignItems: "center",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     gap: 5,
     paddingHorizontal: 14,
     paddingVertical: 9,
@@ -736,11 +1012,19 @@ const styles = StyleSheet.create({
   },
   cropChipLabel: {
     fontSize: FontSize.sm,
+<<<<<<< HEAD
+    fontWeight: '600',
+  },
+  sizeRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+=======
     fontWeight: "600",
   },
   sizeRow: {
     flexDirection: "row",
     flexWrap: "wrap",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     gap: Spacing.sm,
   },
   sizeChip: {
@@ -751,30 +1035,52 @@ const styles = StyleSheet.create({
   },
   sizeChipLabel: {
     fontSize: FontSize.sm,
+<<<<<<< HEAD
+    fontWeight: '600',
+=======
     fontWeight: "600",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
   },
   completeBtn: {
     marginTop: Spacing.md,
   },
   completeBtnInner: {
+<<<<<<< HEAD
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+=======
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     borderRadius: Radius.md,
     height: 54,
     gap: 6,
   },
   completeBtnLabel: {
     fontSize: FontSize.base,
+<<<<<<< HEAD
+    fontWeight: '800',
+    letterSpacing: 0.2,
+  },
+  skipSetup: {
+    alignItems: 'center',
+=======
     fontWeight: "800",
     letterSpacing: 0.2,
   },
   skipSetup: {
     alignItems: "center",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
   },
   skipSetupLabel: {
     fontSize: FontSize.sm,
     color: Colors.textMuted,
+<<<<<<< HEAD
+    fontWeight: '600',
+=======
     fontWeight: "600",
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
   },
 });

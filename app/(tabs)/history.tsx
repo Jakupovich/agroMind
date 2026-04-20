@@ -10,7 +10,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MotiView } from 'moti';
 import { BlurView } from 'expo-blur';
 import { BarChart2, TrendingUp, AlertCircle, Calendar } from 'lucide-react-native';
+<<<<<<< HEAD
+import { WeatherChart } from '@/components/WatherChart';
+=======
 import { WeatherChart } from '../../components/WeatherChart';
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
 import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
 import { temperatureHistory } from '@/constants/mockData';
 
@@ -442,4 +446,8 @@ const styles = StyleSheet.create({
     minWidth: 40,
     textAlign: 'right',
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
