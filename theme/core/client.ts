@@ -11,7 +11,6 @@ class SupabaseManager {
   private static creationCount = 0;
 
   static getClient(): SupabaseClient {
-
     if (this.instance) {
       return this.instance;
     }
@@ -99,7 +98,3 @@ export const safeSupabaseOperation = async <T>(
   const client = getSharedSupabaseClient();
   return await operation(client);
 };
-<<<<<<< HEAD
-
-=======
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
