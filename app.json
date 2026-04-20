@@ -34,12 +34,8 @@
           "backgroundColor": "#ffffff"
         }
       ],
-<<<<<<< HEAD
-      "expo-web-browser"
-=======
       "expo-web-browser",
       "expo-maps"
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
     ],
     "experiments": {
       "typedRoutes": true
