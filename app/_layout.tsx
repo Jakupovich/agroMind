@@ -1,46 +1,37 @@
-import { Stack, router } from 'expo-router';
+import 'react-native-get-random-values';
+import { Stack } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AlertProvider } from '@/theme';
+import { AlertProvider } from '@/theme/ui/context';
+import { AuthProvider } from '@/theme/auth/supabase/context';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View, ActivityIndicator } from 'react-native';
-import { Colors } from '@/constants/theme';
+import { NotificationProvider }from '@/context/NotificationContext';
+import { requestNotificationPermissions } from '@/services/notificationService';
+import { useEffect } from 'react';
 
-function AppGate() {
-  const [checked, setChecked] = useState(false);
-
+function NotificationSetup() {
   useEffect(() => {
-    AsyncStorage.getItem('onboarding_complete').then((val) => {
-      setChecked(true);
-      if (!val) {
-        router.replace('/onboarding');
-      }
-    });
+    requestNotificationPermissions();
   }, []);
-
-  if (!checked) {
-    return (
-      <View style={{ flex: 1, backgroundColor: Colors.bg, alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator color={Colors.green} size="large" />
-      </View>
-    );
-  }
-
   return null;
 }
 
 export default function RootLayout() {
   return (
     <AlertProvider>
-      <SafeAreaProvider>
-        <StatusBar style="light" />
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="onboarding" />
-        </Stack>
-        <AppGate />
-      </SafeAreaProvider>
+      <AuthProvider>
+        <SafeAreaProvider>
+          <NotificationProvider>
+            <StatusBar style="light" />
+            <NotificationSetup />
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="index" />
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen name="onboarding" />
+              <Stack.Screen name="login" />
+            </Stack>
+          </NotificationProvider>
+        </SafeAreaProvider>
+      </AuthProvider>
     </AlertProvider>
   );
 }

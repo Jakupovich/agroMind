@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -19,6 +19,9 @@ import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
 import { predictions } from '@/constants/mockData';
 import { useWeather } from '@/hooks/useWeather';
 import { getWeatherDescription, isHailRisk, isStormRisk } from '@/services/weatherService';
+import { useNotificationHistory } from '@/hooks/useNotificationHistory';
+import { sendSowingWindowAlert } from '@/services/notificationService';
+import { useRouter } from 'expo-router';
 
 const alertColor = (type: string) => {
   if (type === 'warning') return Colors.amber;
@@ -48,8 +51,18 @@ function weatherIcon(desc: string): string {
 
 export default function DashboardScreen() {
   const insets = useSafeAreaInsets();
-  const [notifCount] = useState(3);
+  const router = useRouter();
   const { data: weather, loading, refreshing, error, locationName, refresh } = useWeather();
+  const { unreadCount, addNotification } = useNotificationHistory();
+  const notifCount = unreadCount;
+
+  React.useEffect(() => {
+    const timer = setTimeout(async () => {
+      await sendSowingWindowAlert('Corn', 'April 18-22');
+      addNotification('sowing', 'Corn Sowing Window Open', 'Optimal planting conditions detected for DKC 6088. Sow between April 18-22 for best yield results.', 'high');
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const liveFieldStats = weather ? [
     {
@@ -158,7 +171,7 @@ export default function DashboardScreen() {
                 <RefreshCw size={16} color={Colors.textSecondary} strokeWidth={1.8} />
               </MotiView>
             </Pressable>
-            <Pressable style={styles.notifBtn}>
+            <Pressable style={styles.notifBtn} onPress={() => router.push('/(tabs)/notifications')}>
               <Bell size={20} color={Colors.textPrimary} strokeWidth={1.8} />
               {notifCount > 0 ? (
                 <View style={styles.notifBadge}>

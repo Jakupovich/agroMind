@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,8 @@ import {
   Pressable,
   Switch,
 } from 'react-native';
+import { NotificationContext } from '@/context/NotificationContext';
+import { sendShieldDeployAlert, sendShieldRetractAlert } from '@/services/notificationService';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MotiView } from 'moti';
 import { BlurView } from 'expo-blur';
@@ -91,29 +93,41 @@ export default function HardwareScreen() {
   const [zones, setZones] = useState<Zone[]>(INITIAL_ZONES);
   const [autoMode, setAutoMode] = useState(true);
   const [globalDeployed, setGlobalDeployed] = useState(false);
+  const notifCtx = useContext(NotificationContext);
 
   const deployedCount = zones.filter(z => z.status === 'deployed').length;
   const totalBattery = Math.round(zones.reduce((acc, z) => acc + z.battery, 0) / zones.length);
 
-  const toggleZone = (id: string) => {
+  const toggleZone = async (id: string) => {
+    const zone = zones.find(z => z.id === id);
+    if (!zone || zone.status === 'error') return;
+    const deploying = zone.status !== 'deployed';
+    const action = deploying ? 'DEPLOYED' : 'RETRACTED';
     setZones(prev => prev.map(z => {
       if (z.id !== id) return z;
-      if (z.status === 'error') return z;
-      return {
-        ...z,
-        status: z.status === 'deployed' ? 'retracted' : 'deployed',
-      };
+      return { ...z, status: deploying ? 'deployed' : 'retracted' };
     }));
+    if (deploying) {
+      await sendShieldDeployAlert(zone.name);
+      notifCtx?.addNotification('shield', `${zone.name} Shield Deployed`, `HailGuard shield activated for ${zone.name} (${zone.crop}, ${zone.area}). Crops are protected.`, 'high');
+    } else {
+      await sendShieldRetractAlert(zone.name);
+      notifCtx?.addNotification('shield', `${zone.name} Shield Retracted`, `HailGuard shield retracted for ${zone.name} after all-clear signal.`, 'normal');
+    }
   };
 
-  const deployAll = () => {
+  const deployAll = async () => {
     setGlobalDeployed(true);
     setZones(prev => prev.map(z => z.status === 'error' ? z : { ...z, status: 'deployed' }));
+    await sendShieldDeployAlert('All Zones');
+    notifCtx?.addNotification('shield', 'All Shields Deployed', 'Global deploy command executed. All HailGuard zones are now active and protecting crops.', 'critical');
   };
 
-  const retractAll = () => {
+  const retractAll = async () => {
     setGlobalDeployed(false);
     setZones(prev => prev.map(z => z.status === 'error' ? z : { ...z, status: 'retracted' }));
+    await sendShieldRetractAlert('All Zones');
+    notifCtx?.addNotification('shield', 'All Shields Retracted', 'Global retract command executed. All HailGuard zones are now in standby mode.', 'normal');
   };
 
   return (
