@@ -120,8 +120,4 @@ export async function fetchWeather(latitude: number, longitude: number): Promise
   };
 }
 
-<<<<<<< HEAD
 export const DEFAULT_LOCATION = { latitude: 48.1351, longitude: 11.582 };
-=======
-export const DEFAULT_LOCATION = { latitude: 48.1351, longitude: 11.582 };
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
