@@ -28,8 +28,6 @@ export function ClimateScoreCard({ score, region, season, delay = 0 }: Props) {
   };
 
   const color = getScoreColor(score);
-  const circumference = 2 * Math.PI * 54;
-  const progress = ((100 - score) / 100) * circumference;
 
   return (
     <MotiView
@@ -68,14 +66,14 @@ export function ClimateScoreCard({ score, region, season, delay = 0 }: Props) {
             <View style={styles.scoreInfo}>
               <Text style={styles.scoreTitle}>Climate Resilience</Text>
               <Text style={styles.scoreSeason}>{season}</Text>
-              <View style={styles.progressBar}>
+              <div style={styles.progressBar}>
                 <MotiView
                   from={{ width: '0%' }}
                   animate={{ width: `${score}%` }}
                   transition={{ type: 'timing', duration: 1200, delay: delay + 300 }}
                   style={[styles.progressFill, { backgroundColor: color }]}
                 />
-              </View>
+              </div>
             </View>
           </View>
         </View>
@@ -193,8 +191,4 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 2,
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
