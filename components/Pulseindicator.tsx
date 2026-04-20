@@ -13,20 +13,24 @@ export function PulseIndicator({ label, date, color = Colors.green }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.pulseWrapper}>
+        {/* Outer Pulse Ring */}
         <MotiView
           from={{ opacity: 0.6, scale: 1 }}
           animate={{ opacity: 0, scale: 2.4 }}
           transition={{ type: 'timing', duration: 1800, loop: true }}
           style={[styles.pulse, { backgroundColor: color }]}
         />
+        {/* Inner Pulse Ring (Delayed for "Radar" effect) */}
         <MotiView
           from={{ opacity: 0.4, scale: 1 }}
           animate={{ opacity: 0, scale: 1.8 }}
           transition={{ type: 'timing', duration: 1800, loop: true, delay: 400 }}
           style={[styles.pulse, { backgroundColor: color }]}
         />
+        {/* Static Center Dot */}
         <View style={[styles.dot, { backgroundColor: color }]} />
       </View>
+      
       <View style={styles.textBlock}>
         <Text style={styles.label}>{label}</Text>
         <Text style={[styles.date, { color }]}>{date}</Text>
@@ -57,6 +61,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 8,
+    zIndex: 1, // Ensure dot stays on top of pulse rings
   },
   textBlock: {
     gap: 2,
@@ -73,8 +78,4 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: -0.3,
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
