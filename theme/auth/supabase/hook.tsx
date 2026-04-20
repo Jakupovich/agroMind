@@ -9,6 +9,7 @@ export function useAuth(): AuthContextType {
   const context = useAuthContext();
   
   const isAuthEnabled = configManager.isModuleEnabled('auth');
+  
   if (!isAuthEnabled) {
     return {
       user: null,
@@ -61,7 +62,7 @@ export function useAuth(): AuthContextType {
     }
   };
 
-    const verifyOTPAndLogin = async (email: string, otp: string, options?: { password?: string }): Promise<AuthResult> => {
+  const verifyOTPAndLogin = async (email: string, otp: string, options?: { password?: string }): Promise<AuthResult> => {
     context.setOperationLoading(true);
     try {
       const result = await authService.verifyOTPAndLogin(email, otp, options);
@@ -95,19 +96,7 @@ export function useAuth(): AuthContextType {
 
   const signInWithPassword = async (email: string, password: string): Promise<AuthResult> => {
     context.setOperationLoading(true);
-    try {
-      const result = await authService.signInWithPassword(email, password);
-      return result;
-    } catch (error) {
-      console.warn('[Template:useAuth] signInWithPassword exception:', error);
-      return { 
-        error: 'Login failed',
-        user: null 
-      };
-    } finally {
-      context.setOperationLoading(false);
-    }
-  };
+  }
 
   const logout = async (): Promise<LogoutResult> => {
     context.setOperationLoading(true);
@@ -166,8 +155,4 @@ export function useAuth(): AuthContextType {
     logout,
     refreshSession,
   };
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
