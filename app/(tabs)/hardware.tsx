@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useContext } from 'react';
+=======
+import React, { useState } from 'react';
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
 import {
   View,
   Text,
@@ -7,8 +11,11 @@ import {
   Pressable,
   Switch,
 } from 'react-native';
+<<<<<<< HEAD
 import { NotificationContext } from '@/context/NotificationContext';
 import { sendShieldDeployAlert, sendShieldRetractAlert } from '@/services/notificationService';
+=======
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MotiView } from 'moti';
 import { BlurView } from 'expo-blur';
@@ -93,11 +100,15 @@ export default function HardwareScreen() {
   const [zones, setZones] = useState<Zone[]>(INITIAL_ZONES);
   const [autoMode, setAutoMode] = useState(true);
   const [globalDeployed, setGlobalDeployed] = useState(false);
+<<<<<<< HEAD
   const notifCtx = useContext(NotificationContext);
+=======
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
 
   const deployedCount = zones.filter(z => z.status === 'deployed').length;
   const totalBattery = Math.round(zones.reduce((acc, z) => acc + z.battery, 0) / zones.length);
 
+<<<<<<< HEAD
   const toggleZone = async (id: string) => {
     const zone = zones.find(z => z.id === id);
     if (!zone || zone.status === 'error') return;
@@ -128,6 +139,27 @@ export default function HardwareScreen() {
     setZones(prev => prev.map(z => z.status === 'error' ? z : { ...z, status: 'retracted' }));
     await sendShieldRetractAlert('All Zones');
     notifCtx?.addNotification('shield', 'All Shields Retracted', 'Global retract command executed. All HailGuard zones are now in standby mode.', 'normal');
+=======
+  const toggleZone = (id: string) => {
+    setZones(prev => prev.map(z => {
+      if (z.id !== id) return z;
+      if (z.status === 'error') return z;
+      return {
+        ...z,
+        status: z.status === 'deployed' ? 'retracted' : 'deployed',
+      };
+    }));
+  };
+
+  const deployAll = () => {
+    setGlobalDeployed(true);
+    setZones(prev => prev.map(z => z.status === 'error' ? z : { ...z, status: 'deployed' }));
+  };
+
+  const retractAll = () => {
+    setGlobalDeployed(false);
+    setZones(prev => prev.map(z => z.status === 'error' ? z : { ...z, status: 'retracted' }));
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
   };
 
   return (
@@ -479,4 +511,8 @@ const styles = StyleSheet.create({
   },
   specLabel: { fontSize: FontSize.sm, color: Colors.textSecondary, fontWeight: '500' },
   specValue: { fontSize: FontSize.sm, color: Colors.textPrimary, fontWeight: '600' },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
