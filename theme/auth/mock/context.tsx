@@ -31,10 +31,7 @@ export function MockAuthProvider({ children }: MockAuthProviderProps) {
   });
 
   const updateState = (updates: Partial<MockAuthContextState>) => {
-    setState(prevState => {
-      const newState = { ...prevState, ...updates };
-      return newState;
-    });
+    setState(prevState => ({ ...prevState, ...updates }));
   };
 
   const setOperationLoading = (loading: boolean) => {
@@ -105,8 +102,4 @@ export function useMockAuthContext(): MockAuthContextType {
   }
   
   return context;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
