@@ -39,7 +39,7 @@ export function MockAuthRouter({
     );
 
     const action = !user && !isLoginRoute && !isExcludedRoute ? 'redirect_to_login' :
-                   user && isLoginRoute ? 'redirect_to_home' : 'no_action';
+                    user && isLoginRoute ? 'redirect_to_home' : 'no_action';
 
     if (action === 'redirect_to_login') {
       router.push(loginRoute);
@@ -82,8 +82,4 @@ const styles = StyleSheet.create({
     color: '#9CA3AF',
     textAlign: 'center',
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> fa1781c314271bc6225f3f556fc8cc84d76e834a
